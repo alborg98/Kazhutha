@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // <-- import this for orientation lock
-import 'screens/table_screen.dart';
+import 'screens/splashScreen.dart';
+import 'services/audio_service.dart'; // <-- import your audio service
+import 'screens/loginScreen.dart';
+import 'screens/lobbyScreen.dart'; // <-- import your lobby screen
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +18,24 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _startBgm();
+  }
+
+  void _startBgm() async {
+    await AudioService.init();       // Load mute preference
+    await AudioService().playBgm();  // Start background music
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +45,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      home: const TableScreen(),
       debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+      routes: {
+      '/login': (context) => const LoginScreen(),
+      '/lobby': (context) => const LobbyScreen(),
+      // add other routes if needed
+    },
     );
   }
 }
