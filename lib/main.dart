@@ -4,11 +4,13 @@ import 'screens/splashScreen.dart';
 import 'services/audio_service.dart'; // <-- import your audio service
 import 'screens/loginScreen.dart';
 import 'screens/lobbyScreen.dart'; // <-- import your lobby screen
+import 'package:firebase_core/firebase_core.dart';
+
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp();
   // Lock orientation to landscape only
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -50,7 +52,6 @@ class _MyAppState extends State<MyApp> {
       routes: {
       '/login': (context) => const LoginScreen(),
       '/lobby': (context) => const LobbyScreen(),
-      // add other routes if needed
     },
     );
   }

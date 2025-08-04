@@ -1,29 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LobbyScreen extends StatelessWidget {
   const LobbyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lobby'),
-        backgroundColor: Colors.green.shade800,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              // On logout, go back to login screen
-              Navigator.pushReplacementNamed(context, '/login');
-            },
+      backgroundColor: Colors.green.shade700,
+      body: Stack(
+        children: [
+          Center(
+            child: Text(
+              'Welcome to the Lobby!',
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
           ),
+          if (user != null)
+            Positioned(
+              top: 40,
+              right: 20,
+              child: Row(
+                children: [
+                  if (user.photoURL != null)
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(user.photoURL!),
+                    ),
+                  const SizedBox(width: 10),
+                  Text(
+                    user.displayName ?? 'User',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
-      ),
-      body: Center(
-        child: Text(
-          'Welcome to the Lobby!',
-          style: TextStyle(fontSize: 24, color: Colors.green.shade900),
-        ),
       ),
     );
   }
