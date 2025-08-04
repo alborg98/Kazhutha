@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.kazhuthaGame</string>
+	<string>com.allwink.kazhuthaGame</string>
 	<key>PROJECT_ID</key>
 	<string>kazhutha-3f030</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:779973149666:ios:029ab0315097222f3f6fbb</string>
+	<string>1:779973149666:ios:4e739496b73fbb3f3f6fbb</string>
 </dict>
 </plist>
